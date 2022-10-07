@@ -1,6 +1,6 @@
 # emmaus-nasa
 
-Bienvenue
+Bienvenu
 
 Un ordinateur avec python installé est nécessaire.
 
