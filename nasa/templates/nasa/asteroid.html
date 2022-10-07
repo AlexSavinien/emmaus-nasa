@@ -1,0 +1,56 @@
+{% include 'main.html' %} 
+{% block content %}
+<div class="container">
+  <h1>Astéroïde {{ asteroid.name }}</h1>
+  <p>
+    L'astéroïde <strong>{{ asteroid.name }}</strong> d'une taille d'environ
+    <strong>{{ asteroid.size | floatformat:2}} m de diamètre</strong> passe
+    régulièrement près de la Terre.
+  </p>
+
+  <p>
+    Il a été observé la première fois le
+    <strong>{{ asteroid.firstObservationDate }}</strong> et pour la dernière
+    fois le <strong>{{asteroid.lastObservationDate}}</strong>.
+  </p>
+
+  <p>
+    Il parcours son orbite en
+    <strong>{{ asteroid.dataArcInDays }}</strong> jours.
+  </p>
+
+  <br>
+
+  <p>D'après les calculs de la Nasa, voici la liste de ses 5 dernier passages :</p>
+
+  <div>
+    <ul>
+      {% for previousApproach in asteroid.previousApproaches|slice:5 %}
+      <li>
+        <p>
+          Le <strong>{{ previousApproach.approachDate }}</strong> l'asteroïde est
+          passé à
+          <strong>{{ previousApproach.distance | floatformat:2 }} km.</strong>
+        </p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <br />
+  <p>Et voici la liste de ses 5 prochains passages :</p>
+  <ul>
+    {% for nextApproach in asteroid.nextApproaches|slice:5 %}
+    <li>
+      <p>
+        Le <strong>{{ nextApproach.approachDate }}</strong> l'asteroïde passera
+        à
+        <strong>{{ nextApproach.distance | floatformat:2 }} km.</strong>
+      </p>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'asteroids' %}"><input class="btn btn--sub btn--lg  my-md" type="submit" value="Retour" /></a>
+</div>
+
+{% endblock content %}

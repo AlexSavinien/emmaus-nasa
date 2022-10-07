@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+{% block content %}
+      
+<div class="container">
+  <h1>Recherche d'asteroids proches de la Terre entre deux dates</h1>
+  <p>
+    Choisi une date de début et une date de fin pour obtenir des informations
+    sur les asteroids proche de la Terre à ce moment là.
+  </p>
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="form__field">
+      <label for="start_date">Date de début</label>
+      <input type="date" name="start_date" id="start_date" class="input" value="2022-10-06"/>
+      <label for="end_date">Date de fin</label>
+      <input type="date" name="end_date" id="end_date" class="input" value="2022-10-07"/>
+    </div>
+    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Valider" />
+    
+  </form>
+  {% if results %}
+  <h2>Resultats</h2>
+  <p>
+    
+    {% if results.element_count == 0 %}
+    Il n'y aucun corps proche de la Terre
+    {% else %}
+    Il y a <strong>{{ results.element_count }}</strong> corps proches de la
+    Terre 
+    {% endif %}
+    entre le <strong>{{start_date}}</strong> et le
+    <strong>{{ end_date }}</strong>
+      
+  </p>
+  <br />
+</div>
+<div class="container">
+  <h3>Dates : du {{ start_date }} au {{ end_date }}</h3>
+  <table>
+    <tr>
+      <th>id</th>
+      <th>Nom</th>
+      <th>Diamètre maximum estimé</th>
+      <th>Date du passage au plus proche de la Terre</th>
+      <th>Distance de la Terre à cette date</th>
+    </tr>
+    {% for asteroid in asteroids %}
+    <tr>
+      <a href="{% url 'asteroid' asteroid.id %}">
+      <td>{{ asteroid.id }}</td>
+      <td>{{ asteroid.name }}</td>
+      <td>{{ asteroid.size | floatformat:2 }} m</td>
+      <td>{{ asteroid.dateClosest}}</td>
+      <td>{{ asteroid.distance | floatformat:2 }} km</td>
+      <td><a href="{% url 'asteroid' asteroid.id %}">Plus d'info</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+    {% endif %}
+{% endblock content %}
