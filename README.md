@@ -20,4 +20,4 @@ Pour lancer le serveur :
 `python manage.py runserver`
 
 Vous pouvez à présent aller sur le site via l'url fournit dans le terminal. Elle devrait ressembler à cela :  
-<http://127.0.0.1:8000/asteroid/2177614>
+<http://127.0.0.1:8000/>
