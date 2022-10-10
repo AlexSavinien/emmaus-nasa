@@ -1,4 +1,6 @@
 {% extends 'main.html' %}
+{% load static %}
+
 {% block content %}
       
 <div class="container">
@@ -15,9 +17,12 @@
       <label for="end_date">Date de fin</label>
       <input type="date" name="end_date" id="end_date" class="input" value="2022-10-07"/>
     </div>
-    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Valider" />
-    
+    <input id='submit' class="btn btn--sub btn--lg  my-md" type="submit" value="Valider" />
   </form>
+  <div id='loading' style='width:50px; height:50px' class='hideLoading'>
+    <img src="{% static 'images/loading_earth.gif' %}" >
+  </div>
+  
   {% if results == 'error' %}
   <p>Il faut un écart de moins de 7 jours entre les deux dates</p>
   {% elif results == None %}
@@ -66,3 +71,9 @@
 {% endif %}
     
 {% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'js/loading.js' %}"></script>
+{% endblock scripts %}
+  

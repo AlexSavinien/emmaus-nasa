@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="{% static 'uikit/styles/uikit.css' %}" />
   <!-- Dev Search UI -->
   <link rel="stylesheet" href="{% static 'styles/app.css' %}" />
+  <!-- CSS Perso -->
+  <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
 
   <title>Emmaus - Nasa excercice</title>
 </head>
@@ -35,7 +37,9 @@
   {% endif %}
 
   {% block content %}{% endblock content %}
+  
   <script src="{% static 'uikit/app.js' %}"></script>
+  {% block scripts %}{% endblock scripts %}
 </body>
 
 </html>
