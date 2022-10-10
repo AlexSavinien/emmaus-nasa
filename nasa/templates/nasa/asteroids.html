@@ -18,7 +18,11 @@
     <input class="btn btn--sub btn--lg  my-md" type="submit" value="Valider" />
     
   </form>
-  {% if results %}
+  {% if results == 'error' %}
+  <p>Il faut un écart de moins de 7 jours entre les deux dates</p>
+  {% elif results == None %}
+
+  {% else %}
   <h2>Resultats</h2>
   <p>
     
@@ -44,6 +48,7 @@
       <th>Date du passage au plus proche de la Terre</th>
       <th>Distance de la Terre à cette date</th>
     </tr>
+
     {% for asteroid in asteroids %}
     <tr>
       <a href="{% url 'asteroid' asteroid.id %}">
@@ -55,7 +60,9 @@
       <td><a href="{% url 'asteroid' asteroid.id %}">Plus d'info</a></td>
     </tr>
     {% endfor %}
+
   </table>
 </div>
-    {% endif %}
+{% endif %}
+    
 {% endblock content %}
